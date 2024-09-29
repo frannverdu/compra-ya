@@ -5,7 +5,7 @@ const categories = [
 ]
 
 export const navbar = `
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
   <div class="container-fluid">
     <a class="navbar-brand" href="/compra-ya/index.html">Compra YA!</a>
     <button
