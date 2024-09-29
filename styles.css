@@ -1,4 +1,9 @@
+.center-content {
+  height: 100%;
+  display: grid;
+}
+
 body {
-  background-color: #ccced3;
-  height: 100vh;
+  background-color: #e6e7eb;
+  font-family: 'Nunito', sans-serif;
 }
