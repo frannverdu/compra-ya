@@ -1,13 +1,13 @@
 const categories = [
-  { title: 'Cat 1', url: '/compra-ya/categories/cat1.html' },
-  { title: 'Cat 2', url: '/compra-ya/categories/cat2.html' },
-  { title: 'Cat 3', url: '/compra-ya/categories/cat3.html' },
+  { title: 'Cat 1', url: '/categories/cat1.html' },
+  { title: 'Cat 2', url: '/categories/cat2.html' },
+  { title: 'Cat 3', url: '/categories/cat3.html' },
 ]
 
 export const navbar = `
 <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/compra-ya/index.html">Compra YA!</a>
+    <a class="navbar-brand" href="/index.html">Compra YA!</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -37,7 +37,7 @@ export const navbar = `
           <ul class="dropdown-menu">
 
             ${categories.map(category => `
-              <li><a class="dropdown-item" href="${category.url}">${category.title}</a></li>
+              <li><a class="dropdown-item" href="${category.url}"> ${category.title} </a></li>
             `).join('')}
 
           </ul>
@@ -58,17 +58,19 @@ export const navbar = `
 </nav>
 `;
 
-function handleCartClick() {
-  alert("Carrito clicado");
-}
-
-function logout() {
-  window.location.href = "/compra-ya/login.html";
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('carritoButton').addEventListener('click', handleCartClick);
   document.getElementById('logoutButton').addEventListener('click', logout);
 });
+
+
+function handleCartClick() {
+  alert("Carrito clicado");
+}
+
+function logout() {
+  window.location.href = "/login.html";
+}
 
 export default navbar;
