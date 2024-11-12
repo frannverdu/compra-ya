@@ -1,8 +1,10 @@
-const categories = [
-  { title: 'Cat 1', url: '/categories/cat1.html' },
-  { title: 'Cat 2', url: '/categories/cat2.html' },
-  { title: 'Cat 3', url: '/categories/cat3.html' },
-]
+import categories from '../categories-json.js'
+
+const categoriesDropdown = []
+categories.forEach(category => {
+  categoriesDropdown.push({ title: category.name, url: category.url });
+});
+
 
 export const navbar = `
 <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
@@ -36,7 +38,7 @@ export const navbar = `
           </a>
           <ul class="dropdown-menu">
 
-            ${categories.map(category => `
+            ${categoriesDropdown.map(category => `
               <li><a class="dropdown-item" href="${category.url}"> ${category.title} </a></li>
             `).join('')}
 

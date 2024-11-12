@@ -3,23 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Compra YA! - Cat3</title>
+    <title id="title"> </title>
+    <link rel="icon" href="/store.ico" type="image/x-icon" />
     <!-- Hoja de estilos personalizada -->
     <link rel="stylesheet" href="../styles.css" />
-    <header id="navbar-container"></header>
-
-    <body>
+    <body data-category-id="cat3">
+      <header id="navbar-container"></header>
       <div class="p-4">
-        <div class="d-flex align-items-center justify-content-between">
-          <h3 class="m-0">Categoría 3</h3>
-          <h6 class="m-0">4 elementos</h6>
-        </div>
-        <hr />
+        <div id="category-header"></div>
       </div>
     </body>
-    <main></main>
+    <main class="container">
+      <div class="row" id="items-container"></div>
+    </main>
     <!-- JS propio -->
-    <script type="module" src="./cat3.js"></script>
+    <script type="module" src="./categories.js"></script>
     <!-- Recursos -->
     <script
       src="https://kit.fontawesome.com/9662673cdd.js"
