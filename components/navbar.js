@@ -1,10 +1,21 @@
-import categories from '../categories-json.js'
+const categoriesDropdown = [];
 
-const categoriesDropdown = []
-categories.forEach(category => {
-  categoriesDropdown.push({ title: category.name, url: category.url });
-});
+async function getCategories() {
+  try {
+    const response = await fetch("../categories.json");
+    if (!response.ok) {
+      throw new Error("Error al cargar el archivo JSON");
+    }
+    const data = await response.json();
+    data.forEach((category) => {
+      categoriesDropdown.push({ title: category.name, url: category.url });
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 
+await getCategories();
 
 export const navbar = `
 <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
@@ -38,9 +49,13 @@ export const navbar = `
           </a>
           <ul class="dropdown-menu">
 
-            ${categoriesDropdown.map(category => `
+            ${categoriesDropdown
+              .map(
+                (category) => `
               <li><a class="dropdown-item" href="${category.url}"> ${category.title} </a></li>
-            `).join('')}
+            `
+              )
+              .join("")}
 
           </ul>
         </li>
@@ -60,12 +75,12 @@ export const navbar = `
 </nav>
 `;
 
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('carritoButton').addEventListener('click', handleCartClick);
-  document.getElementById('logoutButton').addEventListener('click', logout);
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .getElementById("carritoButton")
+    .addEventListener("click", handleCartClick);
+  document.getElementById("logoutButton").addEventListener("click", logout);
 });
-
 
 function handleCartClick() {
   alert("Carrito clicado");

@@ -1,6 +1,20 @@
 import navbar from "../components/navbar.js";
 import itemCard from "../components/itemCard.js";
-import categories from "../categories-json.js";
+
+async function getCategories() {
+  try {
+    const response = await fetch("../categories.json");
+    if (!response.ok) {
+      throw new Error("Error al cargar el archivo JSON");
+    }
+    const data = await response.json();
+    setCategoriesData(data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+await getCategories();
 
 document.getElementById("navbar-container").innerHTML = navbar;
 
@@ -33,13 +47,13 @@ function addCategoryHeader(category) {
   categoryHeaderDiv.innerHTML += categoryHTML;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function setCategoriesData(data) {
   const categoryId = document.body.getAttribute("data-category-id");
-  const categoryObject = categories.find((item) => item.id === categoryId);
+  const categoryObject = data.find((item) => item.id === categoryId);
   addCategoryHeader(categoryObject);
   if (categoryObject) {
     renderCards(categoryObject.items);
   } else {
-    console.error(`Categoría "${category}" no encontrada.`);
+    console.error(`Categoría "${categoryId}" no encontrada.`);
   }
-});
+}
