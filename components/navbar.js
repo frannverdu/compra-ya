@@ -48,7 +48,6 @@ export const navbar = `
             Categorías
           </a>
           <ul class="dropdown-menu">
-
             ${categoriesDropdown
               .map(
                 (category) => `
@@ -56,7 +55,6 @@ export const navbar = `
             `
               )
               .join("")}
-
           </ul>
         </li>
       </ul>
@@ -75,12 +73,12 @@ export const navbar = `
 </nav>
 `;
 
-document.addEventListener("DOMContentLoaded", () => {
+window.onload = () => {
   document
     .getElementById("carritoButton")
     .addEventListener("click", handleCartClick);
   document.getElementById("logoutButton").addEventListener("click", logout);
-});
+};
 
 function handleCartClick() {
   alert("Carrito clicado");
