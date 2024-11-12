@@ -19,6 +19,7 @@ export const itemCard = (item) => `
             type="number"
             placeholder="Cantidad"
             min="0"
+            value="1"
             />
         </div>
         <div class="col col-5 text-end">

@@ -85,6 +85,7 @@ function handleCartClick() {
 }
 
 function logout() {
+  sessionStorage.removeItem('userName');
   window.location.href = "/login.html";
 }
 
