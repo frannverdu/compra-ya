@@ -1,6 +1,10 @@
 import navbar from "../components/navbar.js";
 import itemCard from "../components/itemCard.js";
 
+
+
+document.getElementById("navbar-container").innerHTML = navbar;
+
 async function getCategories() {
   try {
     const response = await fetch("../categories.json");
@@ -16,7 +20,7 @@ async function getCategories() {
 
 await getCategories();
 
-document.getElementById("navbar-container").innerHTML = navbar;
+
 
 // Función para renderizar las cards de productos
 function renderCards(items) {
