@@ -1,7 +1,5 @@
 import navbar from "../components/navbar.js";
-import itemCard from "../components/itemCard.js";
-
-
+import { itemCard } from "../components/itemCard.js";
 
 document.getElementById("navbar-container").innerHTML = navbar;
 
@@ -19,8 +17,6 @@ async function getCategories() {
 }
 
 await getCategories();
-
-
 
 // Función para renderizar las cards de productos
 function renderCards(items) {
