@@ -30,6 +30,28 @@ function renderCards(items) {
     `;
   });
   container.innerHTML = cardsHTML;
+
+  items.forEach((item) => {
+    const button = document.getElementById(`btn-${item.id}`);
+    if (button) {
+      button.addEventListener("click", function () {
+        const quantityInput = document.getElementById(`quantity-${item.id}`);
+        const quantity = quantityInput ? quantityInput.value : 1;
+        handleButtonClick(item, quantity);
+      });
+    }
+  });
+}
+
+function handleButtonClick(item, q) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const existingItemIndex = cart.findIndex(cartItem => cartItem.item.id === item.id);
+  if (existingItemIndex !== -1) {
+    cart[existingItemIndex].quantity += Number(q);
+  } else {
+    cart.push({ item, quantity: Number(q) });
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 function addCategoryHeader(category) {

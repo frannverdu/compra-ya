@@ -15,6 +15,7 @@ export const itemCard = (item) => `
         <div class="row justify-content-between">
         <div class="col col-6 d-flex align-center">
             <input
+             id="quantity-${item.id}"
             class="form-control form-control-sm"
             type="number"
             placeholder="Cantidad"
@@ -25,7 +26,7 @@ export const itemCard = (item) => `
         <div class="col col-5 text-end">
             <button
             class="btn btn-outline-success btn-sm me-2 shadow-sm"
-            id="carritoButton"
+            id="btn-${item.id}"
             >
             Agregar al carro
             <i class="fa-solid fa-cart-plus fa-lg"></i>
