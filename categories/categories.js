@@ -1,6 +1,10 @@
 import navbar from "../components/navbar.js";
 import { itemCard } from "../components/itemCard.js";
 
+window.onload = function() {
+  updateCartButton();
+};
+
 document.getElementById("navbar-container").innerHTML = navbar;
 
 async function getCategories() {
@@ -52,6 +56,20 @@ function handleButtonClick(item, q) {
     cart.push({ item, quantity: Number(q) });
   }
   localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartButton()
+}
+
+function updateCartButton() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const totalItems = cart.reduce((sum, cartItem) => sum + Number(cartItem.quantity), 0);
+
+  const cartButton = document.getElementById("carritoButton");
+  if (cartButton) {
+    cartButton.innerHTML = `
+      Carrito (${totalItems})
+      <i class="fa-solid fa-cart-shopping fa-lg"></i>
+    `;
+  }
 }
 
 function addCategoryHeader(category) {

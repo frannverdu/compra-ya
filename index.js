@@ -2,6 +2,10 @@
 import navbar from "./components/navbar.js";
 document.getElementById("navbar-container").innerHTML = navbar;
 
+window.onload = function() {
+  updateCartButton();
+};
+
 async function getRandomItems() {
   try {
     const response = await fetch("../categories.json");
@@ -46,4 +50,20 @@ function addCarouselItem(item, activeItem) {
   </div>
 `;
   carousel.insertAdjacentHTML("beforeend", carouselItemHTML);
+}
+
+function updateCartButton() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const totalItems = cart.reduce(
+    (sum, cartItem) => sum + Number(cartItem.quantity),
+    0
+  );
+
+  const cartButton = document.getElementById("carritoButton");
+  if (cartButton) {
+    cartButton.innerHTML = `
+      Carrito (${totalItems})
+      <i class="fa-solid fa-cart-shopping fa-lg"></i>
+    `;
+  }
 }
