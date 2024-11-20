@@ -1,11 +1,10 @@
-import navbar from "../components/navbar.js";
+import createNavbar from "../components/navbar.js";
+createNavbar();
 import { itemCard } from "../components/itemCard.js";
 
-window.onload = function() {
+window.onload = function () {
   updateCartButton();
 };
-
-document.getElementById("navbar-container").innerHTML = navbar;
 
 async function getCategories() {
   try {
@@ -49,19 +48,24 @@ function renderCards(items) {
 
 function handleButtonClick(item, q) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const existingItemIndex = cart.findIndex(cartItem => cartItem.item.id === item.id);
+  const existingItemIndex = cart.findIndex(
+    (cartItem) => cartItem.item.id === item.id
+  );
   if (existingItemIndex !== -1) {
     cart[existingItemIndex].quantity += Number(q);
   } else {
     cart.push({ item, quantity: Number(q) });
   }
   localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartButton()
+  updateCartButton();
 }
 
 function updateCartButton() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const totalItems = cart.reduce((sum, cartItem) => sum + Number(cartItem.quantity), 0);
+  const totalItems = cart.reduce(
+    (sum, cartItem) => sum + Number(cartItem.quantity),
+    0
+  );
 
   const cartButton = document.getElementById("carritoButton");
   if (cartButton) {

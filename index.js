@@ -1,8 +1,7 @@
-// index.js
-import navbar from "./components/navbar.js";
-document.getElementById("navbar-container").innerHTML = navbar;
+import createNavbar from "./components/navbar.js";
+createNavbar();
 
-window.onload = function() {
+window.onload = function () {
   updateCartButton();
 };
 
