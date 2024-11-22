@@ -83,7 +83,7 @@ export function createNavbar() {
 
     if (carritoButton) {
       carritoButton.addEventListener("click", () => {
-        console.log("Botón 'Carrito' clickeado");
+        window.location.href = "/checkout.html";
       });
     }
 
@@ -95,4 +95,20 @@ export function createNavbar() {
   }
 }
 
-export default createNavbar;
+function updateCartButton() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const totalItems = cart.reduce(
+    (sum, cartItem) => sum + Number(cartItem.quantity),
+    0
+  );
+
+  const cartButton = document.getElementById("carritoButton");
+  if (cartButton) {
+    cartButton.innerHTML = `
+      Carrito (${totalItems})
+      <i class="fa-solid fa-cart-shopping fa-lg"></i>
+    `;
+  }
+}
+
+export default { createNavbar, updateCartButton };

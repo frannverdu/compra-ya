@@ -1,8 +1,8 @@
-import createNavbar from "./components/navbar.js";
-createNavbar();
+import navbar from "./components/navbar.js";
+navbar.createNavbar();
 
 window.onload = function () {
-  updateCartButton();
+  navbar.updateCartButton()
 };
 
 async function getRandomItems() {
@@ -51,18 +51,3 @@ function addCarouselItem(item, activeItem) {
   carousel.insertAdjacentHTML("beforeend", carouselItemHTML);
 }
 
-function updateCartButton() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const totalItems = cart.reduce(
-    (sum, cartItem) => sum + Number(cartItem.quantity),
-    0
-  );
-
-  const cartButton = document.getElementById("carritoButton");
-  if (cartButton) {
-    cartButton.innerHTML = `
-      Carrito (${totalItems})
-      <i class="fa-solid fa-cart-shopping fa-lg"></i>
-    `;
-  }
-}

@@ -1,59 +1,88 @@
-import createNavbar from "../components/navbar.js";
-createNavbar();
+import navbar from "../components/navbar.js";
+navbar.createNavbar();
 
 window.onload = function () {
-  updateCartButton();
+  navbar.updateCartButton();
 };
-
-function updateCartButton() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const totalItems = cart.reduce(
-    (sum, cartItem) => sum + Number(cartItem.quantity),
-    0
-  );
-
-  const cartButton = document.getElementById("carritoButton");
-  if (cartButton) {
-    cartButton.innerHTML = `
-        Carrito (${totalItems})
-        <i class="fa-solid fa-cart-shopping fa-lg"></i>
-      `;
-  }
-}
 
 function renderItemList() {
   const productList = document.getElementById("itemsList");
   productList.innerHTML = "";
   const items = JSON.parse(localStorage.getItem("cart") || "[]");
-
-  items.forEach((item) => {
-    const listItem = document.createElement("li");
-    listItem.className =
-      "list-group-item product-item my-2 shadow-sm rounded border border-dark-subtle pb-2";
-    listItem.innerHTML = `
-            <div class="row align-items-center">
-                <div class="col-md-2 col-sm-3 mb-2 mb-md-0">
-                    <img src="${item.item.image}" alt="${item.item.name}" class="item-image img-fluid rounded shadow-sm ">
-                </div>
-                <div class="col-lg-5 col-md-4 col-sm-9 mb-2 mb-md-0 p-4">
-                    <h5 class="mb-1">${item.item.name}</h5>
-                    <p class="price mb-0">Precio: $${item.item.price}</p>
-                </div>
-                <div class="col-md-3 col-sm-12 mb-2 mb-md-0  px-4">
-                    <div class="input-group">
-                        <span class="input-group-text">Cantidad</span>
-                        <input type="number" class="form-control quantity-input" value="${item.quantity}" min="1" data-id="${item.item.id}">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-12 text-md-end text-center px-4">
-                    <button class="btn w-100 small btn-sm btn-danger delete-btn block" data-id="${item.item.id}">
-                    Eliminar
-                    </button>
+  if (items.length) {
+    items.forEach((item) => {
+      const listItem = document.createElement("div");
+      listItem.classList.add("container-fluid");
+      listItem.className =
+        "container-fluid shadow-sm rounded border border-dark-subtle my-2";
+      listItem.innerHTML = `
+        <div class="row align-items-center">
+            <div class="col-md-2 col-sm-3 col-lg-2 p-0">
+                <img src="${item.item.image}" alt="${item.item.name}" class="item-image img-fluid rounded shadow-sm ">
+            </div>
+            <div class="col-lg-6 col-md-4 col-sm-9 p-3">
+                <h5 class="mb-1">${item.item.name}</h5>
+                <p class="price mb-0">Precio: $${item.item.price}</p>
+            </div>
+            <div class="col-md-3 col-sm-12 col-lg-2 p-2">
+                <div class="input-group">
+                    <span class="input-group-text">Cantidad</span>
+                    <input type="number" class="form-control quantity-input" value="${item.quantity}" min="1" data-id="${item.item.id}">
                 </div>
             </div>
-        `;
-    productList.appendChild(listItem);
-  });
+            <div class="col-md-3 col-sm-12 col-lg-2 p-2">
+                <button class="btn w-100 btn-sm btn-danger delete-btn" data-id="${item.item.id}">
+                Eliminar
+                </button>
+            </div>
+        </div>
+      `;
+
+      const deleteButton = listItem.querySelector(".delete-btn");
+      deleteButton.addEventListener("click", () => {
+        const itemId = deleteButton.dataset.id;
+        const updatedItems = items.filter((r) => r.item.id !== itemId);
+        localStorage.setItem("cart", JSON.stringify(updatedItems));
+        renderItemList();
+        navbar.updateCartButton();
+      });
+
+      productList.appendChild(listItem);
+    });
+    const actions = document.getElementById("actions");
+    actions.innerHTML = `
+      <button class="btn outlined btn-lg btn-outline-primary" id="cancelBtn">
+        Cancelar
+      </button>
+      <button class="btn btn-lg btn-primary" id="continueBtn">
+        Continuar
+      </button>
+    `;
+  } else {
+    const actions = document.getElementById("actions");
+    actions.innerHTML = "";
+    const emptyCartCard = `
+    <div class="card text-center mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Carro vacío</h5>
+        <p class="card-text">No hay artículos agregados al carro.</p>
+      </div>
+    </div>
+  `;
+    productList.innerHTML = emptyCartCard;
+  }
 }
 
 renderItemList();
+
+const cancelButton = document.getElementById("cancelBtn");
+const continueButton = document.getElementById("continueBtn");
+
+if (cancelButton && continueButton) {
+  cancelButton.addEventListener("click", () => {
+    window.location.href = "/index.html";
+  });
+  continueButton.addEventListener("click", () => {
+    alert("Cargando...");
+  });
+}

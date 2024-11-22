@@ -1,9 +1,9 @@
-import createNavbar from "../components/navbar.js";
-createNavbar();
+import navbar from "../components/navbar.js";
+navbar.createNavbar();
 import { itemCard } from "../components/itemCard.js";
 
 window.onload = function () {
-  updateCartButton();
+  navbar.updateCartButton();
 };
 
 async function getCategories() {
@@ -21,7 +21,6 @@ async function getCategories() {
 
 await getCategories();
 
-// Función para renderizar las cards de productos
 function renderCards(items) {
   const container = document.getElementById("items-container");
   let cardsHTML = "";
@@ -57,23 +56,7 @@ function handleButtonClick(item, q) {
     cart.push({ item, quantity: Number(q) });
   }
   localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartButton();
-}
-
-function updateCartButton() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const totalItems = cart.reduce(
-    (sum, cartItem) => sum + Number(cartItem.quantity),
-    0
-  );
-
-  const cartButton = document.getElementById("carritoButton");
-  if (cartButton) {
-    cartButton.innerHTML = `
-      Carrito (${totalItems})
-      <i class="fa-solid fa-cart-shopping fa-lg"></i>
-    `;
-  }
+  navbar.updateCartButton();
 }
 
 function addCategoryHeader(category) {
