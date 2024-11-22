@@ -75,6 +75,7 @@ function renderItemList() {
 
 renderItemList();
 
+
 const cancelButton = document.getElementById("cancelBtn");
 const continueButton = document.getElementById("continueBtn");
 

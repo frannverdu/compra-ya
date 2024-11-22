@@ -83,13 +83,13 @@ export function createNavbar() {
 
     if (carritoButton) {
       carritoButton.addEventListener("click", () => {
-        window.location.href = "/checkout.html";
+        window.location.href = "../checkout/checkout.html";
       });
     }
 
     if (logoutButton) {
       logoutButton.addEventListener("click", () => {
-        window.location.href = "/login.html";
+        window.location.href = "../auth/login.html";
       });
     }
   }
