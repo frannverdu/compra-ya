@@ -8,7 +8,7 @@ window.onload = function () {
 
 async function getCategories() {
   try {
-    const response = await fetch("../categories.json");
+    const response = await fetch("../data/categories.json");
     if (!response.ok) {
       throw new Error("Error al cargar el archivo JSON");
     }
