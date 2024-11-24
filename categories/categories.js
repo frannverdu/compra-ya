@@ -39,13 +39,13 @@ function renderCards(items) {
       button.addEventListener("click", function () {
         const quantityInput = document.getElementById(`quantity-${item.id}`);
         const quantity = quantityInput ? quantityInput.value : 1;
-        handleButtonClick(item, quantity);
+        addItemTocart(item, quantity);
       });
     }
   });
 }
 
-function handleButtonClick(item, q) {
+function addItemTocart(item, q) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const existingItemIndex = cart.findIndex(
     (cartItem) => cartItem.item.id === item.id
