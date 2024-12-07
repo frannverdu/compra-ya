@@ -1,6 +1,7 @@
 import navbar from "../components/navbar.js";
 navbar.createNavbar();
 import { itemCard } from "../components/itemCard.js";
+let globalCategory = null;
 
 window.onload = function () {
   navbar.updateCartButton();
@@ -75,13 +76,13 @@ function addCategoryHeader(category) {
 }
 
 function setCategoriesData(data) {
-
   let categoryObject = null;
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const category = urlParams.get("category");
   if (category) {
     categoryObject = data.find((item) => item.id === category);
+    globalCategory = categoryObject;
   } else {
     window.location = "/index.html";
   }
@@ -93,3 +94,12 @@ function setCategoriesData(data) {
     console.error(`Categoría "${categoryId}" no encontrada.`);
   }
 }
+
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", (event) => {
+  const query = event.target.value.toLowerCase();
+  const filteredItems = globalCategory.items.filter((item) =>
+    item.name.toLowerCase().includes(query)
+  );
+  renderCards(filteredItems);
+});
