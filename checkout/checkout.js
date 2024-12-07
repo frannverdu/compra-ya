@@ -84,6 +84,6 @@ if (cancelButton && continueButton) {
     window.location.href = "/index.html";
   });
   continueButton.addEventListener("click", () => {
-    alert("Cargando...");
+    window.open('https://link.mercadopago.com.ar/fverdu', "_blank");
   });
 }
