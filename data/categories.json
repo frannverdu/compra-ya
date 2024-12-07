@@ -1,8 +1,8 @@
 [
   {
-    "id": "cat1",
+    "id": "notebooks",
     "name": "Notebooks",
-    "url": "/categories/cat1.html",
+    "url": "/categories/genericCategories.html?category=notebooks",
     "items": [
       {
         "id": "item1",
@@ -77,9 +77,9 @@
     ]
   },
   {
-    "id": "cat2",
+    "id": "celulares",
     "name": "Celulares",
-    "url": "/categories/cat2.html",
+    "url": "/categories/genericCategories.html?category=celulares",
     "items": [
       {
         "id": "item11",
@@ -119,9 +119,9 @@
     ]
   },
   {
-    "id": "cat3",
+    "id": "tablets",
     "name": "Tablets",
-    "url": "/categories/cat3.html",
+    "url": "/categories/genericCategories.html?category=tablets",
     "items": [
       {
         "id": "item16",

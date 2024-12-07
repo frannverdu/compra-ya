@@ -75,8 +75,17 @@ function addCategoryHeader(category) {
 }
 
 function setCategoriesData(data) {
-  const categoryId = document.body.getAttribute("data-category-id");
-  const categoryObject = data.find((item) => item.id === categoryId);
+
+  let categoryObject = null;
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const category = urlParams.get("category");
+  if (category) {
+    categoryObject = data.find((item) => item.id === category);
+  } else {
+    window.location = "/index.html";
+  }
+
   addCategoryHeader(categoryObject);
   if (categoryObject) {
     renderCards(categoryObject.items);
