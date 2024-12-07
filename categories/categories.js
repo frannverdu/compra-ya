@@ -57,6 +57,14 @@ function addItemTocart(item, q) {
     cart.push({ item, quantity: Number(q) });
   }
   localStorage.setItem("cart", JSON.stringify(cart));
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    position: {
+      x: 50,
+      y: 100,
+    },
+  });
   navbar.updateCartButton();
 }
 
